@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CategoriaProducto extends Model
 {
     use HasFactory;
+
+    protected $table = 'categorias_productos'; // Nombre de la tabla en la base de datos
+
+    protected $fillable = [
+        'nombre', 'descripcion',
+    ];
 }

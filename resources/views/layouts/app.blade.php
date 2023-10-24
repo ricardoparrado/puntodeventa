@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Punto de Venta</title>
 
-    <!-- Agrega enlaces a hojas de estilo CSS de Tailwind y DaisyUI -->
+    <!-- Agregar enlaces a hojas de estilo CSS de Tailwind y DaisyUI -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-    <!-- Agrega enlaces a scripts JS si es necesario -->
+    <!-- Agregar enlaces a scripts JS si es necesario -->
 
 </head>
 <body class="bg-gray-100">
     <header class="bg-blue-500 p-4">
         <nav class="container mx-auto flex items-center justify-between">
             <a href="/" class="text-white text-2xl font-bold">Tu Punto de Venta</a>
-            <!-- Aquí puedes agregar la barra de navegación si la necesitas -->
+            <!-- Barra de navegación -->
         </nav>
     </header>
     <main class="container mx-auto mt-8 p-4">
@@ -29,6 +29,6 @@
         </div>
     </footer>
 
-    <!-- Agrega scripts JS si es necesario -->
+    <!-- Agregar scripts JS si es necesario -->
 </body>
 </html>
