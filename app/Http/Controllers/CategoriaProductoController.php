@@ -10,12 +10,12 @@ class CategoriaProductoController extends Controller
     public function index()
     {
         $categorias = CategoriaProducto::all();
-        return view('categorias-productos.index', compact('categorias'));
+        return view('categorias.index', compact('categorias'));
     }
 
     public function create()
     {
-        return view('categorias-productos.create');
+        return view('categorias.create');
     }
 
     public function store(Request $request)
@@ -27,20 +27,20 @@ class CategoriaProductoController extends Controller
 
         CategoriaProducto::create($request->all());
 
-        return redirect()->route('categorias-productos.index')
+        return redirect()->route('categorias.index')
             ->with('success', 'Categoría creada satisfactoriamente.');
     }
 
     public function show($id)
     {
         $categoria = CategoriaProducto::findOrFail($id);
-        return view('categorias-productos.show', compact('categoria'));
+        return view('categorias.show', compact('categoria'));
     }
 
     public function edit($id)
     {
         $categoria = CategoriaProducto::findOrFail($id);
-        return view('categorias-productos.edit', compact('categoria'));
+        return view('categorias.edit', compact('categoria'));
     }
 
     public function update(Request $request, $id)
@@ -53,7 +53,7 @@ class CategoriaProductoController extends Controller
         $categoria = CategoriaProducto::findOrFail($id);
         $categoria->update($request->all());
 
-        return redirect()->route('categorias-productos.index')
+        return redirect()->route('categorias.index')
             ->with('success', 'Categoría actualizada satisfactoriamente.');
     }
 
@@ -62,7 +62,7 @@ class CategoriaProductoController extends Controller
         $categoria = CategoriaProducto::findOrFail($id);
         $categoria->delete();
 
-        return redirect()->route('categorias-productos.index')
+        return redirect()->route('categorias.index')
             ->with('success', 'Categoría eliminada satisfactoriamente.');
     }
 }

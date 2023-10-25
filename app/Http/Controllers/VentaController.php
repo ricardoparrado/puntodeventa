@@ -7,59 +7,66 @@ use Illuminate\Http\Request;
 
 class VentaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $ventas = Venta::all();
+        return view('ventas.index', compact('ventas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('ventas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'cliente_id' => 'required|integer',
+            'producto_id' => 'required|integer',
+            'cantidad' => 'required|integer',
+            'total' => 'required|numeric',
+        ]);
+
+        Venta::create($request->all());
+
+        return redirect()->route('ventas.index')
+            ->with('success', 'Venta registrada satisfactoriamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Venta $venta)
+    public function show($id)
     {
-        //
+        $venta = Venta::findOrFail($id);
+        return view('ventas.show', compact('venta'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Venta $venta)
+    public function edit($id)
     {
-        //
+        $venta = Venta::findOrFail($id);
+        return view('ventas.edit', compact('venta'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Venta $venta)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'cliente_id' => 'required|integer',
+            'producto_id' => 'required|integer',
+            'cantidad' => 'required|integer',
+            'total' => 'required|numeric',
+        ]);
+
+        $venta = Venta::findOrFail($id);
+        $venta->update($request->all());
+
+        return redirect()->route('ventas.index')
+            ->with('success', 'Venta actualizada satisfactoriamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Venta $venta)
+    public function destroy($id)
     {
-        //
+        $venta = Venta::findOrFail($id);
+        $venta->delete();
+
+        return redirect()->route('ventas.index')
+            ->with('success', 'Venta eliminada satisfactoriamente.');
     }
 }

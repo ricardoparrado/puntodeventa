@@ -7,59 +7,66 @@ use Illuminate\Http\Request;
 
 class CompraController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $compras = Compra::all();
+        return view('compras.index', compact('compras'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('compras.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'proveedor_id' => 'required|integer',
+            'producto_id' => 'required|integer',
+            'cantidad' => 'required|integer',
+            'total' => 'required|numeric',
+        ]);
+
+        Compra::create($request->all());
+
+        return redirect()->route('compras.index')
+            ->with('success', 'Compra registrada satisfactoriamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Compra $compra)
+    public function show($id)
     {
-        //
+        $compra = Compra::findOrFail($id);
+        return view('compras.show', compact('compra'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Compra $compra)
+    public function edit($id)
     {
-        //
+        $compra = Compra::findOrFail($id);
+        return view('compras.edit', compact('compra'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Compra $compra)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'proveedor_id' => 'required|integer',
+            'producto_id' => 'required|integer',
+            'cantidad' => 'required|integer',
+            'total' => 'required|numeric',
+        ]);
+
+        $compra = Compra::findOrFail($id);
+        $compra->update($request->all());
+
+        return redirect()->route('compras.index')
+            ->with('success', 'Compra actualizada satisfactoriamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Compra $compra)
+    public function destroy($id)
     {
-        //
+        $compra = Compra::findOrFail($id);
+        $compra->delete();
+
+        return redirect()->route('compras.index')
+            ->with('success', 'Compra eliminada satisfactoriamente.');
     }
 }

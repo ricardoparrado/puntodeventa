@@ -26,3 +26,7 @@ Route::get('/', function () {
 
 Route::resource('productos', 'ProductoController');
 Route::resource('categorias-productos', 'CategoriaProductoController');
+Route::resource('clientes', 'ClienteController');
+Route::resource('ventas', 'VentaController');
+Route::resource('compras', 'CompraController');
+Route::resource('proveedores', 'ProveedorController');

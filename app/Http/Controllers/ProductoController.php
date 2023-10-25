@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $productos = Producto::all();
@@ -23,18 +20,16 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-        // Validación de datos
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
-            'existencias' => 'required|integer',
         ]);
 
         Producto::create($request->all());
 
         return redirect()->route('productos.index')
-            ->with('success', 'Producto creado satisfactoriamente.');
+            ->with('success', 'Producto registrado satisfactoriamente.');
     }
 
     public function show($id)
@@ -51,12 +46,10 @@ class ProductoController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validación de datos
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
-            'existencias' => 'required|integer',
         ]);
 
         $producto = Producto::findOrFail($id);
