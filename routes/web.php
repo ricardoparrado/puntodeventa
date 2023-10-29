@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CategoriaProductoController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\VentaController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\ProveedorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +31,9 @@ Route::get('/', function () {
 |
 */
 
-Route::resource('productos', 'ProductoController');
-Route::resource('categorias-productos', 'CategoriaProductoController');
-Route::resource('clientes', 'ClienteController');
-Route::resource('ventas', 'VentaController');
-Route::resource('compras', 'CompraController');
-Route::resource('proveedores', 'ProveedorController');
+Route::resource('productos', ProductoController::class);
+Route::resource('categorias', CategoriaProductoController::class);
+Route::resource('clientes', ClienteController::class);
+Route::resource('ventas', VentaController::class);
+Route::resource('compras', CompraController::class);
+Route::resource('proveedores', ProveedorController::class);

@@ -1,39 +1,46 @@
 @extends('layouts.app')
 
+@section('titulo', 'Editar Producto')
+@section('cabecera', 'Editar Producto')
+
 @section('content')
-    <div class="mb-4">
-        <h1 class="text-2xl font-semibold">Editar Producto</h1>
-        <a href="{{ route('productos.index') }}" class="text-blue-500 hover:underline">Volver a la Lista</a>
+<div class="min-h-screen flex items-center justify-center">
+    <div class="bg-white w-full sm:w-96 p-6 rounded-lg shadow-lg">
+        <div class="text-2xl font-semibold text-gray-700 mb-4">Editar Producto</div>
+
+        <form method="POST" action="{{ route('productos.update', $producto->id) }}" class="space-y-4">
+            @csrf
+            @method('PUT')
+
+            <div class="space-y-2">
+                <label for="nombre" class="block font-medium text-gray-700">Nombre</label>
+                <input id="nombre" type="text" class="w-full px-4 py-2 border rounded-lg" name="nombre" value="{{ $producto->nombre }}" required>
+            </div>
+
+            <div class="space-y-2">
+                <label for="descripcion" class="block font-medium text-gray-700">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="3" class="w-full px-4 py-2 border rounded-lg" required>{{ $producto->descripcion }}</textarea>
+            </div>
+
+            <div class="space-y-2">
+                <label for="precio" class="block font-medium text-gray-700">Precio</label>
+                <input id="precio" type="number" class="w-full px-4 py-2 border rounded-lg" name="precio" value="{{ $producto->precio }}" required>
+            </div>
+
+            <div class="space-y-2">
+                <label for="existencias" class="block font-medium text-gray-700">Existencias</label>
+                <input id="existencias" type="number" class="w-full px-4 py-2 border rounded-lg" name="existencias" value="{{ $producto->existencias }}" required>
+            </div>
+
+            <div class="flex justify-between">
+                <button type="submit" class="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                    Actualizar Producto
+                </button>
+                <a href="{{ route('productos.index') }}" class="w-1/2 px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400">
+                    Cancelar
+                </a>
+            </div>
+        </form>
     </div>
-
-    <form method="POST" action="{{ route('productos.update', $producto->id) }}">
-        @csrf
-        @method('PUT')
-
-        <div class="bg-white p-4 rounded-lg shadow">
-            <div class="mb-4">
-                <label for="nombre" class="block font-semibold">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" value="{{ $producto->nombre }}" class="w-full p-2 border rounded">
-            </div>
-
-            <div class="mb-4">
-                <label for="descripcion" class="block font-semibold">Descripción:</label>
-                <textarea name="descripcion" id="descripcion" class="w-full p-2 border rounded">{{ $producto->descripcion }}</textarea>
-            </div>
-
-            <div class="mb-4">
-                <label for="precio" class="block font-semibold">Precio:</label>
-                <input type="number" name="precio" id="precio" value="{{ $producto->precio }}" class="w-full p-2 border rounded">
-            </div>
-
-            <div class="mb-4">
-                <label for="existencias" class="block font-semibold">Existencias:</label>
-                <input type="number" name="existencias" id="existencias" value="{{ $producto->existencias }}" class="w-full p-2 border rounded">
-            </div>
-
-            <!-- Otros campos para la edición del producto -->
-
-            <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-700">Actualizar Producto</button>
-        </div>
-    </form>
+</div>
 @endsection

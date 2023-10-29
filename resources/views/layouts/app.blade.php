@@ -1,34 +1,44 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Punto de Venta</title>
-
-    <!-- Agregar enlaces a hojas de estilo CSS de Tailwind y DaisyUI -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
-    <!-- Agregar enlaces a scripts JS si es necesario -->
-
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@yield('titulo', 'Punto de Venta')</title>
+    @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100">
-    <header class="bg-blue-500 p-4">
-        <nav class="container mx-auto flex items-center justify-between">
-            <a href="/" class="text-white text-2xl font-bold">Tu Punto de Venta</a>
-            <!-- Barra de navegación -->
-        </nav>
+
+<body>
+    <header>
+        {{-- navbar --}}
+        @include('partials.navigation')
     </header>
-    <main class="container mx-auto mt-8 p-4">
+    <main>
+        {{-- Título Cabecera --}}
+        <div class="bg-green-200 my-4 text-center">
+            <h1 class="text-lg font-semibold m-4 uppercase">@yield('cabecera')</h1>
+        </div>
+        {{-- Mensajes informativos --}}
+        @if (session('info'))
+            <div class="flex justify-end m-4">
+                <div class="alert alert-info w-96">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        class="stroke-current shrink-0 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>{{ session('info') }}</span>
+                </div>
+            </div>
+        @endif
+        {{-- Contenido --}}
         @yield('content')
     </main>
-    <footer class="bg-blue-500 p-4">
-        <div class="container mx-auto text-white text-center">
-            <!-- Pie de página, información de contacto, etc. -->
-            © {{ date('Y') }} Tu Punto de Venta
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content mt-12">
+        <div>
+            <p>Copyright © 2023 - Punto de Venta</p>
         </div>
     </footer>
-
-    <!-- Agregar scripts JS si es necesario -->
 </body>
+
 </html>

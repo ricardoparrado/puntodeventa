@@ -1,35 +1,35 @@
 @extends('layouts.app')
 
+@section('titulo', 'Detalles del Cliente')
+@section('cabecera', 'Detalles del Cliente')
+
 @section('content')
-<div class="container">
-    <h1>Editar Cliente</h1>
+<div class="container mx-auto mt-8">
+    <div class="w-full max-w-sm mx-auto">
+        <div class="card bg-white rounded-lg shadow-lg">
+            <div class="card-body space-y-4">
+                <h1 class="text-2xl font-semibold">Detalles del Cliente</h1>
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+                <div class="flex space-x-2">
+                    <strong class="font-semibold">Nombre:</strong>
+                    <p>{{ $cliente->nombre }}</p>
+                </div>
+
+                <div class="flex space-x-2">
+                    <strong class="font-semibold">Correo Electrónico:</strong>
+                    <p>{{ $cliente->email }}</p>
+                </div>
+
+                <div class="flex space-x-2">
+                    <strong class="font-semibold">Teléfono:</strong>
+                    <p>{{ $cliente->telefono }}</p>
+                </div>
+
+                <div class="flex justify-center">
+                    <a href="{{ route('clientes.index') }}" class="btn btn-primary">Volver al Listado</a>
+                </div>
+            </div>
+        </div>
     </div>
-    @endif
-
-    <form action="{{ route('clientes.update', $cliente->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" class="form-control" id="nombre" value="{{ $cliente->nombre }}" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Correo Electrónico:</label>
-            <input type="email" name="email" class="form-control" id="email" value="{{ $cliente->email }}">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Teléfono:</label>
-            <input type="text" name="telefono" class="form-control" id="telefono" value="{{ $cliente->telefono }}">
-        </div>
-        <button type="submit" class="btn btn-primary">Actualizar Cliente</button>
-    </form>
 </div>
 @endsection

@@ -1,82 +1,71 @@
-@extends('layouts.app')  
+@extends('layouts.app')
+
+@section('titulo', 'Crear Producto')
+@section('cabecera', 'Crear Producto')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Crear Producto</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('productos.store') }}">
-                            {{ csrf_field() }}
+<div class="min-h-screen flex items-center justify-center">
+    <div class="w-full sm:w-96 p-6 rounded-lg shadow-lg bg-white">
+        <div class="text-2xl font-semibold text-gray-700 mb-4">Crear Producto</div>
 
-                            <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                                <label for="nombre" class="col-md-4 control-label">Nombre</label>
+        <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+            @csrf
 
-                                <div class="col-md-6">
-                                    <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required autofocus>
-
-                                    @if ($errors->has('nombre'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('nombre') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('descripcion') ? ' has-error' : '' }}">
-                                <label for="descripcion" class="col-md-4 control-label">Descripción</label>
-
-                                <div class="col-md-6">
-                                    <textarea id="descripcion" class="form-control" name="descripcion" required>{{ old('descripcion') }}</textarea>
-
-                                    @if ($errors->has('descripcion'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('descripcion') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('precio') ? ' has-error' : '' }}">
-                                <label for="precio" class="col-md-4 control-label">Precio</label>
-
-                                <div class="col-md-6">
-                                    <input id="precio" type="number" class="form-control" name="precio" value="{{ old('precio') }}" required>
-
-                                    @if ($errors->has('precio'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('precio') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('existencias') ? ' has-error' : '' }}">
-                                <label for="existencias" class="col-md-4 control-label">Existencias</label>
-
-                                <div class="col-md-6">
-                                    <input id="existencias" type="number" class="form-control" name="existencias" value="{{ old('existencias') }}" required>
-
-                                    @if ($errors->has('existencias'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('existencias') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Crear Producto
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            {{-- Categoría --}}
+            <div class="space-y-2">
+                <label for="categoria_id" class="block font-medium text-gray-700">Categoría</label>
+                <select name="categoria_id" class="select select-bordered w-full">
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
-        </div>
+
+            {{-- Nombre --}}
+            <div class="space-y-2">
+                <label for="nombre" class="block font-medium text-gray-700">Nombre</label>
+                <input type="text" name="nombre" placeholder="Nombre del producto" maxlength="100"
+                    class="w-full px-4 py-2 border rounded-lg" value="{{ old('nombre') }}" required />
+            </div>
+
+            {{-- Imagen --}}
+            <div class="space-y-2">
+                <label for="imagen" class="block font-medium text-gray-700">Imagen</label>
+                <input type="file" name="imagen"
+                    class="file-input file-input-bordered file-input-success file-input-sm w-full max-w-xs"
+                    accept=".jpg" required />
+            </div>
+
+            {{-- Descripción --}}
+            <div class="space-y-2">
+                <label for="descripcion" class="block font-medium text-gray-700">Descripción</label>
+                <input type="text" name="descripcion" placeholder="Escriba la descripción" maxlength="255"
+                    class="w-full px-4 py-2 border rounded-lg" value="{{ old('descripcion') }}" />
+            </div>
+
+            {{-- Precio --}}
+            <div class="space-y-2">
+                <label for="precio" class="block font-medium text-gray-700">Precio</label>
+                <input type="number" name="precio" placeholder="Escriba el precio"
+                    class="w-full px-4 py-2 border rounded-lg" value="{{ old('precio') }}" required />
+            </div>
+
+            {{-- Stock --}}
+            <div class="space-y-2">
+                <label for="stock" class="block font-medium text-gray-700">Stock</label>
+                <input type="number" name="stock" placeholder="Escriba el stock"
+                    class="w-full px-4 py-2 border rounded-lg" value="{{ old('stock') }}" required />
+            </div>
+
+            <div class="flex justify-between">
+                <button type="submit"
+                    class="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                    Crear Producto
+                </button>
+                <a href="{{ route('productos.index') }}"
+                    class="w-1/2 px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400">Cancelar</a>
+            </div>
+        </form>
     </div>
+</div>
 @endsection

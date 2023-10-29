@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Producto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
 
@@ -10,12 +12,15 @@ class VentaController extends Controller
     public function index()
     {
         $ventas = Venta::all();
-        return view('ventas.index', compact('ventas'));
+        $clientes = Cliente::all();
+        return view('ventas.index', compact('ventas', 'clientes'));
     }
 
     public function create()
     {
-        return view('ventas.create');
+        $clientes = Cliente::all();
+        $productos = Producto::all();
+        return view('ventas.create', compact('clientes', 'productos'));
     }
 
     public function store(Request $request)

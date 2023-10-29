@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoriaProducto;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class ProductoController extends Controller
 
     public function create()
     {
-        return view('productos.create');
+        $categorias = CategoriaProducto::all(); 
+        return view('productos.create', compact('categorias'));
     }
 
     public function store(Request $request)
@@ -24,13 +26,25 @@ class ProductoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Valida que sea una imagen válida (puedes ajustar las reglas según tus necesidades)
         ]);
-
-        Producto::create($request->all());
-
+    
+        $productoData = $request->all();
+    
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $nombreImagen = time() . '.' . $imagen->getClientOriginalExtension();
+            $rutaImagen = public_path('/public/img');
+            $imagen->move($rutaImagen, $nombreImagen);
+            $productoData['imagen'] = '/public/img/' . $nombreImagen; 
+        }
+    
+        Producto::create($productoData);
+    
         return redirect()->route('productos.index')
             ->with('success', 'Producto registrado satisfactoriamente.');
     }
+    
 
     public function show($id)
     {

@@ -1,19 +1,23 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <h1>Detalles de la Compra</h1>
+@section('titulo', 'Detalles de la Compra')
+@section('cabecera', 'Detalles de la Compra')
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">ID de Compra: {{ $compra->id }}</h5>
-            <p class="card-text">Proveedor: {{ $compra->proveedor->nombre }}</p>
-            <p class="card-text">Producto: {{ $compra->producto->nombre }}</p>
-            <p class="card-text">Cantidad: {{ $compra->cantidad }}</p>
-            <p class="card-text">Total: {{ $compra->total }}</p>
+@section('content')
+<div class="container mx-auto mt-8">
+    <div class="bg-white p-4 rounded-lg shadow">
+        <h1 class="text-2xl font-semibold">Detalles de la Compra</h1>
+        <div class="mb-4">
+            <a href="{{ route('compras.index') }}" class="text-blue-500 hover:underline">Volver a la Lista</a>
+        </div>
+
+        <div class="mb-4">
+            <p><strong>ID:</strong> {{ $compra->id }}</p>
+            <p><strong>Proveedor:</strong> {{ $compra->proveedor->nombre }}</p>
+            <p><strong>Producto:</strong> {{ $compra->producto->nombre }}</p>
+            <p><strong>Cantidad:</strong> {{ $compra->cantidad }}</p>
+            <p><strong>Total:</strong> {{ $compra->total }}</p>
         </div>
     </div>
-
-    <a href="{{ route('compras.index') }}" class="btn btn-primary mt-3">Volver a la Lista de Compras</a>
 </div>
 @endsection

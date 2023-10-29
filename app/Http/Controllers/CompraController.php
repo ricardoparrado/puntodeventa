@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compra;
+use App\Models\Producto;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
@@ -15,7 +17,9 @@ class CompraController extends Controller
 
     public function create()
     {
-        return view('compras.create');
+        $proveedores = Proveedor::all();
+        $productos = Producto::all();
+        return view('compras.create', compact('proveedores', 'productos'));
     }
 
     public function store(Request $request)

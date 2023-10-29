@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@section('titulo', 'Editar Categoría de Productos')
+@section('cabecera', 'Editar Categoría de Productos')
+
+
 @section('content')
-    <div class="container">
-        <h1>Editar Categoría de Productos</h1>
+    <div class="container mx-auto mt-8">
+        <div class="text-2xl font-semibold mb-4">Editar Categoría de Productos</div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -14,22 +18,26 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('categorias-productos.update', $categoria->id) }}">
+        <form method="POST" action="{{ route('categorias.update', $categoria->id) }}">
             @csrf
             @method('PUT')
 
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre', $categoria->nombre) }}" required>
-            </div>
+            <div class="card w-full shadow-lg bg-white p-4 rounded-lg">
+                <div class="form-control">
+                    <label for="nombre" class="block font-medium mb-2">Nombre</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded" id="nombre" name="nombre" value="{{ old('nombre', $categoria->nombre) }}" required>
+                </div>
 
-            <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="4">{{ old('descripcion', $categoria->descripcion) }}</textarea>
-            </div>
+                <div class="form-control">
+                    <label for="descripcion" class="block font-medium mb-2">Descripción</label>
+                    <textarea class="w-full p-2 border border-gray-300 rounded" id="descripcion" name="descripcion" rows="4">{{ old('descripcion', $categoria->descripcion) }}</textarea>
+                </div>
 
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            <a href="{{ route('categorias-productos.index') }}" class="btn btn-secondary">Cancelar</a>
+                <div class="flex mt-4">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <a href="{{ route('categorias.index') }}" class="btn btn-secondary ml-2">Cancelar</a>
+                </div>
+            </div>
         </form>
     </div>
 @endsection
