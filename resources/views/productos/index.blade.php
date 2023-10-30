@@ -6,7 +6,13 @@
 @section('content')
     <div class="container mx-auto mt-8">
         <div class="text-2xl font-semibold mb-4">Lista de Productos</div>
-        
+
+        @if (session('success'))
+        <div class="alert alert-success mb-4">
+            {{ session('success') }}
+        </div>
+        @endif
+       
         <div class="flex justify-end">
         <a href="{{ route('productos.create') }}" class="btn btn-primary mb-4">Crear Producto</a>
         </div>

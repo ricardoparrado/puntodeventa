@@ -52,9 +52,9 @@
 
             {{-- Stock --}}
             <div class="space-y-2">
-                <label for="stock" class="block font-medium text-gray-700">Stock</label>
-                <input type="number" name="stock" placeholder="Escriba el stock"
-                    class="w-full px-4 py-2 border rounded-lg" value="{{ old('stock') }}" required />
+                <label for="existencias" class="block font-medium text-gray-700">Existencias</label>
+                <input type="number" name="existencias" placeholder="Escriba la Existencia"
+                    class="w-full px-4 py-2 border rounded-lg" value="{{ old('existencias') }}" required />
             </div>
 
             <div class="flex justify-between">

@@ -46,7 +46,9 @@ class CompraController extends Controller
     public function edit($id)
     {
         $compra = Compra::findOrFail($id);
-        return view('compras.edit', compact('compra'));
+        $proveedores = Proveedor::all();
+        $productos = Producto::all();
+        return view('compras.edit', compact('compra', 'proveedores', 'productos'));
     }
 
     public function update(Request $request, $id)

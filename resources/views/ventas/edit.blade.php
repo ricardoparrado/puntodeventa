@@ -60,7 +60,7 @@
                                 required>
                         </div>
 
-                        <div class="flex">
+                        <div class="flex justify-center">
                             <button type="submit"
                                 class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mr-2">Actualizar
                                 Venta</button>

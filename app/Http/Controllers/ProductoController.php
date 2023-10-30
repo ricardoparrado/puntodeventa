@@ -16,7 +16,7 @@ class ProductoController extends Controller
 
     public function create()
     {
-        $categorias = CategoriaProducto::all(); 
+        $categorias = CategoriaProducto::all();
         return view('productos.create', compact('categorias'));
     }
 
@@ -26,7 +26,8 @@ class ProductoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
-            'imagen' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Valida que sea una imagen válida (puedes ajustar las reglas según tus necesidades)
+            'existencias' => 'required|integer',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
         $productoData = $request->all();
@@ -36,7 +37,7 @@ class ProductoController extends Controller
             $nombreImagen = time() . '.' . $imagen->getClientOriginalExtension();
             $rutaImagen = public_path('/public/img');
             $imagen->move($rutaImagen, $nombreImagen);
-            $productoData['imagen'] = '/public/img/' . $nombreImagen; 
+            $productoData['imagen'] = '/public/img/' . $nombreImagen;
         }
     
         Producto::create($productoData);
@@ -45,6 +46,7 @@ class ProductoController extends Controller
             ->with('success', 'Producto registrado satisfactoriamente.');
     }
     
+
 
     public function show($id)
     {
@@ -64,14 +66,22 @@ class ProductoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
+            'existencias' => 'required|integer',
         ]);
 
         $producto = Producto::findOrFail($id);
-        $producto->update($request->all());
+
+        $producto->update([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'existencias' => $request->existencias, 
+        ]);
 
         return redirect()->route('productos.index')
             ->with('success', 'Producto actualizado satisfactoriamente.');
     }
+
 
     public function destroy($id)
     {

@@ -11,6 +11,13 @@
                 class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Nueva Compra</a>
         </div>
 
+        @if (session('success'))
+        <div class="alert alert-success mb-4">
+            {{ session('success') }}
+        </div>
+        @endif
+
+
         @if (count($compras) > 0)
             <div class="card w-full shadow-lg bg-white p-4 rounded-lg">
                 <table class="table-auto w-full">
