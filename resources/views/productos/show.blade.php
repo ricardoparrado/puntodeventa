@@ -18,9 +18,9 @@
                         
                     </div>
 
-                    <div class="flex justify-end mt-4">
+                    <div class="flex justify-center mt-4">
                         <a href="{{ route('productos.index') }}"
-                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                             Volver a la Lista
                         </a>
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard as HtmlDashboard;
 
 class DashboardController extends Controller
 {
@@ -12,7 +13,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.index');
     }
 
     /**
@@ -61,5 +62,15 @@ class DashboardController extends Controller
     public function destroy(Dashboard $dashboard)
     {
         //
+    }
+
+    public function sales()
+    {
+        return view('dashboard.sales');
+    }
+
+    public function inventory()
+    {
+        return view('dashboard.inventory');
     }
 }

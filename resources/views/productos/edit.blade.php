@@ -33,7 +33,7 @@
             </div>
 
             <div class="flex justify-center">
-                <button type="submit" class="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                <button type="submit" class="w-1/2 px-2 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                     Actualizar Producto
                 </button>
                 <a href="{{ route('productos.index') }}" class="w-1/2 px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400">
