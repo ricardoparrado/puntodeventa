@@ -47,26 +47,32 @@ class ProductoController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Buscar el producto por su ID
         $producto = Producto::find($id);
 
+        // Verificar si el producto existe
         if (!$producto) {
             return response()->json(['error' => 'Producto no encontrado'], 404);
         }
 
+        // Validar los datos recibidos
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric',
             'existencias' => 'required|integer',
-            // ... otras reglas de validación ...
+            // Agrega aquí otras reglas de validación si es necesario
         ]);
 
+        // Verificar si hay errores de validación
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
+        // Actualizar los datos del producto
         $producto->update($request->all());
 
+        // Devolver la respuesta con el producto actualizado
         return response()->json(['data' => $producto], 200);
     }
 
