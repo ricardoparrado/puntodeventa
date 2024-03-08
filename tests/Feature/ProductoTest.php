@@ -22,7 +22,7 @@ class ProductoTest extends TestCase
             'descripcion' => 'descripcion 1',
             'precio' => 100,
             'existencias' => 10,
-            
+
         ]);
 
         // Verificamos que la solicitud sea exitosa (código de respuesta HTTP 201)
@@ -34,11 +34,11 @@ class ProductoTest extends TestCase
             'descripcion' => 'descripcion 1',
             'precio' => 100,
             'existencias' => 10,
-            
+
         ]);
     }
 
-            // Test para obtener todos los productos
+    // Test para obtener todos los productos
     public function test_obtener_todos_los_productos(): void
     {
         $response = $this->get('/api/v1/productos');
@@ -48,7 +48,7 @@ class ProductoTest extends TestCase
     // Test para obtener un producto
     public function test_obtener_un_producto(): void
     {
-       // $producto = Producto::factory()->create();
+        // $producto = Producto::factory()->create();
 
         $response = $this->get("/api/v1/productos/9");
         $response->assertStatus(200);
@@ -57,7 +57,7 @@ class ProductoTest extends TestCase
     // Test para actualizar un producto
     public function test_actualizar_producto(): void
     {
-       // $producto = Producto::factory()->create();
+        // $producto = Producto::factory()->create();
 
         $response = $this->put("/api/v1/productos/9", [
             'nombre' => 'producto actualizado',
@@ -69,5 +69,17 @@ class ProductoTest extends TestCase
         $response->assertStatus(200);
     }
 
-}
+    // Test para eliminar un producto
+    public function test_eliminar_producto(): void
+    {
+        // Suponemos que el producto con ID 9 existe en la base de datos
 
+        $response = $this->delete("/api/v1/productos/9");
+
+        // Verificar que la solicitud sea exitosa (código de respuesta HTTP 200)
+        $response->assertStatus(200);
+
+        // Verificar que el producto se haya eliminado de la base de datos
+        $this->assertDatabaseMissing('productos', ['id' => 9]);
+    }
+}
